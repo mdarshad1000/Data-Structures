@@ -42,7 +42,7 @@
 
   `At the Beginning LL` 
   i.   Create a new node. (with some data, and it points to NULL)
-  ii.  Point it to the first node i.e add reference of the first node.
+  ii.  Point it to the first node i.e add reference of the first node to the new node i.e HEAD(Head contains ref to the first node).
        (Initially the reference is NULL) 
   iii. Point the HEAD to the new node.
 
@@ -80,9 +80,11 @@ class Node:
         self.data = data
         self.ref = None  # We are creating independent nodes, hence the reference is None
 
+
 class LinkedList:
     def __init__(self):
         self.head = None
+
 
     def print_LL(self):
         if self.head is None:
@@ -90,10 +92,38 @@ class LinkedList:
         else:
             n = self.head
             while n is not None: # Until we've reached the last element
-                print(n.data)
-                n = n.ref # reference changes to the next node
+                print(n.data,"--->",end=" ")    
+                n = n.ref        # reference changes to the next node
+    
+
+    def add_begin(self, data):
+        new_node = Node(data)    # Creating a New Node
+        new_node.ref = self.head # pointing to the HEAD as the ref of first element is stored in HEAD
+        self.head = new_node     # Pointing the head to the newly created node (which is at the beginning) 
+
+
+    def add_end(self, data):
+        new_node = Node(data)
+
+        # Check if LinkedList is empty
+        if self.head is None:
+            # We have to create first Node
+            self.head = new_node # store ref of new node in HEAD
+        else:
+            n = self.head
+            while n.ref is not None:
+                n = n.ref
+            n.ref = new_node
+ 
 
 
 LL1 = LinkedList()
-LL1.print_LL()
+LL1.add_begin(10)
+LL1.add_begin(63)
+LL1.add_begin(91)
+LL1.add_end(101)
+LL1.add_end(56)
 
+
+
+LL1.print_LL()
